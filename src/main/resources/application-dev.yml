@@ -1,0 +1,11 @@
+
+server:
+  port: 8080
+student:
+  name: Tjddy
+  age: 18
+  address: Beijing
+  grade: 3
+  class: 2
+
+

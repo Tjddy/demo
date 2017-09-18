@@ -1,0 +1,8 @@
+server:
+  port: 8081
+student:
+  name: Tom
+  age: 18
+  address: Shanghai
+  grade: 3
+  class: 2
