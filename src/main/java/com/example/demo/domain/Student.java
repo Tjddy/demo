@@ -14,6 +14,7 @@ public class Student {
     @javax.persistence.Id
     @GeneratedValue
     private Integer id;
+
     private String name;
     @Min(value = 10 ,message = "年龄小于最小值！")
     private Integer age;
@@ -40,5 +41,14 @@ public class Student {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 }

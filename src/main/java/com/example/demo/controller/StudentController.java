@@ -1,8 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.aspect.HttpAspect;
+import com.example.demo.domain.Result;
 import com.example.demo.domain.Student;
 import com.example.demo.service.StudentService;
 import com.example.demo.repository.StuentRepository;
+import com.example.demo.utils.ResultUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +20,9 @@ import java.util.List;
  */
 @RestController
 public class StudentController {
+
+    private static final Logger logger= LoggerFactory.getLogger(StudentController.class);
+
     @Autowired
     private StuentRepository stuentRepository ;
 
@@ -27,21 +35,24 @@ public class StudentController {
      */
     @GetMapping("/students")
     public List<Student> studentList(){
+        logger.info("------student----");
         return stuentRepository.findAll();
+
     }
 
     /**
      * 添加一个学生
      */
     @PostMapping("/students")
-    public Student studentAdd(@Valid Student student , BindingResult result){
-        if (result.hasErrors()){
-            System.out.println(result.getFieldError().getDefaultMessage());
-            return null;
+    public Result<Student> studentAdd(@Valid Student student , BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+//            return null;
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
         student.setName(student.getName());
         student.setAge(student.getAge());
-        return stuentRepository.save(student);
+
+        return ResultUtil.success(stuentRepository.save(student));
     }
 
     /**
@@ -78,9 +89,16 @@ public class StudentController {
         return stuentRepository.findByAge(age);
     }
 
+    //添加两个学生
     @PostMapping("/students/two")
     public void studentTwo(){
         studentService.insertTwo();
+    }
+
+    //
+    @GetMapping("/students/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+       studentService.getAge(id);
     }
 }
 
