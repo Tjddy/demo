@@ -16,6 +16,7 @@ public class Student {
     private Integer id;
 
     private String name;
+
     @Min(value = 10 ,message = "年龄小于最小值！")
     private Integer age;
 

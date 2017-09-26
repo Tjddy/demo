@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.aspect.HttpAspect;
 import com.example.demo.domain.Result;
 import com.example.demo.domain.Student;
 import com.example.demo.service.StudentService;
-import com.example.demo.repository.StuentRepository;
+import com.example.demo.repository.StudentRepository;
 import com.example.demo.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,7 @@ public class StudentController {
     private static final Logger logger= LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
-    private StuentRepository stuentRepository ;
+    private StudentRepository studentRepository;
 
     @Autowired
     private StudentService studentService;
@@ -36,7 +35,7 @@ public class StudentController {
     @GetMapping("/students")
     public List<Student> studentList(){
         logger.info("------student----");
-        return stuentRepository.findAll();
+        return studentRepository.findAll();
 
     }
 
@@ -52,7 +51,7 @@ public class StudentController {
         student.setName(student.getName());
         student.setAge(student.getAge());
 
-        return ResultUtil.success(stuentRepository.save(student));
+        return ResultUtil.success(studentRepository.save(student));
     }
 
     /**
@@ -60,7 +59,7 @@ public class StudentController {
      */
     @GetMapping("/students/{id}")
     public Student studentFindOne(@PathVariable("id") Integer id){
-        return stuentRepository.findOne(id);
+        return studentRepository.findOne(id);
     }
     /**
      *通过id更新一个学生
@@ -73,20 +72,20 @@ public class StudentController {
         student.setId(id);
         student.setName(name);
         student.setAge(age);
-        return stuentRepository.save(student);
+        return studentRepository.save(student);
     }
     /**
      *通过id删除一个学生
      */
     @DeleteMapping("/students/{id}")
     public void studentDel(@PathVariable("id") Integer id){
-        stuentRepository.delete(id);
+        studentRepository.delete(id);
     }
 
     //通过年龄查询学生列表
     @GetMapping("/students/age/{age}")
     public List<Student> studentListByAge(@PathVariable("age") Integer age){
-        return stuentRepository.findByAge(age);
+        return studentRepository.findByAge(age);
     }
 
     //添加两个学生
@@ -95,7 +94,7 @@ public class StudentController {
         studentService.insertTwo();
     }
 
-    //
+    //示例，通过id查询一个学生的年龄
     @GetMapping("/students/getAge/{id}")
     public void getAge(@PathVariable("id") Integer id) throws Exception{
        studentService.getAge(id);

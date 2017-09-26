@@ -14,7 +14,9 @@ public class ResultUtil {
         return result;
     }
 
+    //成功的情况下也可能不含object（即成功也可能没有返回数据）
     public static Result success(){
+        //此处调用上面定义的success方法，传入null值
         return success(null);
     }
 

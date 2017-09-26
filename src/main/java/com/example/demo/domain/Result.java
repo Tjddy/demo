@@ -11,7 +11,7 @@ public class Result<T> {
     //提示信息
     private String msg;
 
-    //具体的内容
+    //具体的内容,用泛型表示
     private T data;
 
     public Integer getCode() {

@@ -1,6 +1,7 @@
 package com.example.demo.enums;
 
 /**
+ * 将code和message对应起来
  * Created by xzf on 2017/9/19.
  */
 public enum ResultEnum {
@@ -17,6 +18,10 @@ public enum ResultEnum {
         this.msg = msg;
     }
 
+    /**
+     * 枚举类中给getter方法就可以了，枚举的使用都是使用构造方法来创建，不会再set它的值
+     * @return
+     */
     public Integer getCode() {
         return code;
     }
